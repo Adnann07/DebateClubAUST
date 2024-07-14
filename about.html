@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <title>AustDC</title>
+    <style>
+        .counter-section {
+            text-align: center;
+            padding: 50px 0;
+            background-image: linear-gradient(rgba(4, 9, 30, 0.7), rgba(4, 9, 30, 0.7)), url("images/banner.jpeg");
+            background-size: cover;
+            position: relative;
+            color: #fff;
+        }
+
+        .counter-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 1;
+        }
+
+        .counter-section .counter {
+            position: relative;
+            z-index: 2;
+            display: inline-block;
+            margin: 20px;
+            font-size: 2em;
+            color: #fff;
+            font-family: 'Roboto', sans-serif;
+        }
+
+        .counter-section .counter span {
+            display: block;
+            font-size: 1em;
+            color: #fff;
+        }
+
+        .counter-section .counter div {
+            font-weight: bold;
+            color: #fff;
+            animation: countAnimation 2s ease-out;
+        }
+
+        @keyframes countAnimation {
+            0% { transform: scale(0.8); opacity: 0; }
+            100% { transform: scale(1); opacity: 1; }
+        }
+
+        .counter-section .counter::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80%;
+            height: 4px;
+            background: #ff5733;
+            border-radius: 4px;
+            animation: underlineAnimation 2s ease-out;
+        }
+
+        @keyframes underlineAnimation {
+            0% { width: 0; }
+            100% { width: 80%; }
+        }
+
+        
+    </style>
+</head>
+<body>
+    <section class="sub-header">
+        <nav>
+            <a href="index.html"><img src="images/logo.png"></a>
+            <div class="nav-links" id="navLinks">
+                <i class="fa fa-times" onclick="hideMenu()"></i>
+                <ul>
+                    <li><a href="index.html">HOME</a></li>
+                    <li><a href="about.html">ABOUT</a></li>
+                    <li><a href="events.html">EVENTS</a></li>
+                    <li><a href="comittee.html">COMMITTEE MEMBERS</a></li>
+                    <li><a href="News.html">NEWS</a></li>
+                    <li><a href="contact.html">CONTACT US</a></li>
+                </ul>
+            </div>
+            <i class="fa fa-bars" onclick="showMenu()"></i>
+        </nav>
+        <h1>About us</h1>
+    </section>
+
+    <section class="about-us">
+        <div class="row">
+            <div class="about-col">
+                <h1>About AUSTDC</h1>
+                <p>At AUST Debate Club, we believe in the power of dialogue to shape perspectives, challenge assumptions, and inspire change.
+                    <br> Whether you're a seasoned debater or just dipping your toes into the world of rhetoric, <br>our inclusive environment welcomes all skill levels and backgrounds. 
+                    <br>Through regular meetings, workshops, and competitions, we provide opportunities <br>for members to sharpen their argumentation skills,
+                    <br> expand their knowledge on diverse topics,<br> and build confidence in expressing their viewpoints.
+                    <br>Join us at the AUST Debate Club and embark on a journey of self-discovery, growth, and meaningful connection. 
+                </p>
+                <a href="https://www.facebook.com/austdc/" class="red">JOIN US</a>
+            </div>
+            <div class="about-col">
+                <img src="images/aboutus.jpg">
+            </div>
+        </div>
+    </section>
+
+    <section class="counter-section">
+        <div class="counter">
+            <div id="active-members">0</div>
+            <span>Active Members</span>
+        </div>
+        <div class="counter">
+            <div id="events">0</div>
+            <span>Events</span>
+        </div>
+        <div class="counter">
+            <div id="workshops">0</div>
+            <span>Workshops</span>
+        </div>
+        <div class="counter">
+            <div id="practice-debates">0</div>
+            <span>Practice Debates</span>
+        </div>
+    </section>
+
+    <section class="footer">
+        <h4>CONNECT WITH US ON SOCIAL MEDIA</h4>
+        <div class="icons">
+            <a href="https://www.facebook.com/austdc/" target="_blank"><i class="fab fa-facebook"></i></a>
+            <a href="https://twitter.com" target="_blank"><i class="fab fa-twitter"></i></a>
+            <a href="https://www.instagram.com/austdc_official/" target="_blank"><i class="fab fa-instagram"></i></a>
+            <a href="https://www.linkedin.com/company/aust-debating-club?originalSubdomain=bd" target="_blank"><i class="fab fa-linkedin"></i></a>
+        </div>
+        © Copyright 2022 AUST Debate Club All Rights Reserved 
+    </section>
+
+    <script>
+        var navLinks = document.getElementById("navLinks");
+        function showMenu(){
+            navLinks.style.right = "0";
+        }
+
+        function hideMenu(){
+            navLinks.style.right = "-200px";
+        }
+
+        function animateCounter(id, start, end, duration) {
+            const element = document.getElementById(id);
+            let startTimestamp = null;
+            const step = (timestamp) => {
+                if (!startTimestamp) startTimestamp = timestamp;
+                const progress = Math.min((timestamp - startTimestamp) / duration, 1);
+                element.textContent = Math.floor(progress * (end - start) + start);
+                if (progress < 1) {
+                    window.requestAnimationFrame(step);
+                }
+            };
+            window.requestAnimationFrame(step);
+        }
+
+        document.addEventListener("DOMContentLoaded", function() {
+            animateCounter("active-members", 0, 1200, 2000);
+            animateCounter("events", 0, 2, 2000);
+            animateCounter("workshops", 0, 20, 2000);
+            animateCounter("practice-debates", 0, 140, 2000);
+        });
+    </script>
+</body>
+</html>
